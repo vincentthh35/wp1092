@@ -1,0 +1,183 @@
+/* @font-face {
+    font-family: "myFont";
+    src: url("");
+} */
+.background {
+    background-color: #28292f;
+    margin: auto;
+    width: 360px;
+    height: 620px;
+    display: flex;
+    flex-direction: column;
+}
+.top-nav {
+    display: flex;
+    flex-direction: row;
+}
+.left-down {
+    padding: 20px;
+    color: #abd0c3;
+    opacity: 0.7;
+}
+.left-down:hover {
+    opacity: 1;
+}
+.right-menu {
+    padding: 20px;
+    color: #abd0c3;
+    opacity: 0.7;
+}
+.right-menu:hover {
+    opacity: 1;
+}
+.top-text {
+    text-align: center;
+    color: #abd0c3;
+    font-size: 20;
+    height: 65px;
+    padding-top: 10px;
+    font-size: 11px;
+    flex-grow: 2;
+}
+.top-text > .category {
+    font-weight: bold;
+    font-size: 12px
+}
+.album-picture {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 320px;
+}
+.info {
+    padding-top: 35px;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: flex;
+    flex-direction: row;
+}
+.song-name {
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    color: #abd0c3;
+    flex-grow: 3;
+    /* TODO: font family */
+}
+.song-name > .artist {
+    font-weight: normal;
+    font-size: 15px;
+    color: #97b8ac;
+}
+.heart {
+    flex-grow: 1;
+    color: #abd0c3;
+    font-size: 13px;
+    padding-top: 5px;
+    opacity: 0.7;
+}
+.heart:hover {
+    opacity: 1;
+}
+.playing-track {
+    padding-top: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 3px;
+    background: #636161;
+    outline: none;
+    opacity: 0.7;
+}
+.slider:hover {
+    opacity: 1;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+    cursor: pointer;
+    border-radius: 50%;
+}
+input[type=range]::-moz-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    background: #ffffff;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.playing-time {
+    padding-top: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+    flex-direction: row;
+    color: #abd0c3;
+    font-size: 13px;
+    justify-content: space-between;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    /* TODO: font-family */
+}
+.bottom-functions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 10px;
+    color: #abd0c3;
+    text-align: center;
+}
+.bottom-functions > .random {
+    font-size: 15px;
+    flex-grow: 2;
+    text-align: left;
+    padding-left: 10px;
+    opacity: 0.7;
+}
+.bottom-functions > .random:hover {
+    opacity: 1;
+}
+.bottom-functions > .back {
+    font-size: 20px;
+    flex-grow: 1;
+    opacity: 0.7;
+}
+.bottom-functions > .back:hover {
+    opacity: 1;
+}
+.bottom-functions > .play-pause {
+    font-size: 50px;
+    flex-grow: 1;
+    padding-left: 10px;
+    padding-right: 10px;
+    opacity: 0.7;
+}
+.bottom-functions > .play-pause:hover {
+    opacity: 1;
+}
+.bottom-functions > .next {
+    font-size: 20px;
+    flex-grow: 1;
+    opacity: 0.7;
+}
+.bottom-functions > .next:hover {
+    opacity: 1;
+}
+.bottom-functions > .repeat {
+    flex-grow: 2;
+    font-size: 15px;
+    text-align: right;
+    padding-right: 10px;
+    opacity: 0.7;
+}
+.bottom-functions > .repeat:hover {
+    opacity: 1;
+}
