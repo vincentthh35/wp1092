@@ -1,0 +1,84 @@
+*{
+    margin:0;
+    padding:0;
+}
+.box{
+    width: 280px;
+    height: 500px;
+    background-color: rgb(12, 44, 82);
+    margin: auto;
+    border-radius: 10%;
+    border: 5px double #000;
+}
+.box img{
+    float: left;
+    width: 240px;
+    margin: 0px 15px 10px;
+    border-radius: 10%;
+    border: 5px double #fff;
+} 
+.box h3{
+    text-align: center;
+    color:#fff;
+} 
+.box .btn{
+    display:flex;
+    width: 270px;
+    height: 150px;
+    margin:auto;
+}
+.box .btn .item1{
+    width: 40px; height: 40px;
+    transform: rotate(135deg);
+    box-shadow: 12.5px 12.5px 0px 0 #fff;
+    display:inline-block;
+    margin:auto;
+    transition: box-shadow .5s 0s ease;
+}
+.box .btn .item1::after{
+    content: "";
+    width: 40px; height: 40px;
+    box-shadow: 12.5px 12.5px 0px 0 #fff;
+    position: absolute;right:20px;bottom:20px;
+    transition: box-shadow .5s 0s ease;
+}
+.box .btn .item2{
+    border-top: 35px solid transparent;
+    border-bottom: 35px solid transparent;
+    border-left: 60px solid #fff;
+    margin: auto; 
+    margin-right: -5px; 
+    display: inline-block;
+    transition: border-left .5s 0s ease;
+}
+.box .btn .item3{
+    width: 40px; height: 40px;
+    transform: rotate(-45deg);
+    box-shadow: 12.5px 12.5px 0px 0 #fff;
+    display:inline-block;
+    margin:auto;
+    margin-right: 50px;
+    transition: box-shadow .5s 0s ease;
+}
+.box .btn .item3::after{
+    content: "";
+    width: 40px; height: 40px;
+    box-shadow: 12.5px 12.5px 0px 0 #fff;
+    position: absolute;left:20px;top:20px;
+    transition: box-shadow .5s 0s ease;
+}
+.box .btn .item1:hover{
+    box-shadow: 12.5px 12.5px 0px 0 rgb(243, 227, 135);
+}
+.box .btn .item1:hover:after{
+    box-shadow: 12.5px 12.5px 0px 0 rgb(243, 227, 135);
+}
+.box .btn .item2:hover{
+    border-left: 60px solid rgb(243, 227, 135);
+}
+.box .btn .item3:hover{
+    box-shadow: 12.5px 12.5px 0px 0 rgb(243, 227, 135);
+}
+.box .btn .item3:hover:after{
+    box-shadow: 12.5px 12.5px 0px 0 rgb(243, 227, 135);
+}
