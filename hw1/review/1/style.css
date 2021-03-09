@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+body {
+    background: #000000;
+}
+
+#background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    filter: blur(7px);
+    z-index: -1;
+}
+
+/* container for music player */
+.container {
+    position: absolute;
+    height: 300pt;
+    width: 250pt;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #000000;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #000000;
+}
+
+/* container for play, pause, previous track, next track, and progress bar  */
+.box {
+    position: absolute;
+    height: 50%;
+    width: 103%;
+    background: -webkit-linear-gradient(45deg, rgb(40, 40, 40), rgb(133, 133, 133));
+    z-index: 4;
+    bottom: -17%;
+}
+
+/* album cover */
+/* #thumbnail {
+    position: absolute;
+    width: 100%;
+    height: 70%;
+    top:0%;
+    transition: 1s;
+    z-index: 3;
+} */
+
+/* disc pattern settings */
+#disc {
+    position: absolute;
+    top: 10%;
+    height: 140px;
+    width: 140px;
+    z-index: 1;
+    border-radius: 50%;
+    background: transparent;
+    margin: 20px;
+    transition: .9s linear;
+    box-shadow:
+      0 8px 6px -8px rgba(0,0,0,0.5),
+      0 0 1px 1px rgba(0,0,0,0.5),
+      0 0 0 1px #666 inset,
+      0 0 0 2px #222 inset,
+      0 30px 0px -29px #444 inset,
+      0 -30px 0px -29px #444 inset,
+      0 0 0 3px #333 inset,
+      0 0 0 4px #222 inset,
+      0 0 0 5px #333 inset,
+      0 33px 0px -27px #444 inset,
+      0 -33px 0px -27px #444 inset,
+      0 0 0 6px #222 inset,
+      0 0 0 7px #333 inset,
+      0 0 0 8px #222 inset,
+      0 34px 0px -25px #444 inset,
+      0 -34px 0px -25px #444 inset,
+      0 0 0 9px #333 inset,
+      0 0 0 10px #222 inset,
+      0 0 0 11px #333 inset,
+      0 35px 0px -23px #444 inset,
+      0 -35px 0px -23px #444 inset,
+      0 0 0 12px #222 inset,
+      0 0 0 13px #333 inset,
+      0 0 0 14px #222 inset,
+      0 36px 0px -21px #444 inset,
+      0 -36px 0px -21px #444 inset,
+      0 0 0 15px #333 inset,
+      0 0 0 16px #222 inset,
+      0 0 0 17px #333 inset,
+      0 37px 0px -19px #444 inset,
+      0 -37px 0px -19px #444 inset,
+      0 0 0 18px #222 inset,
+      0 0 0 19px #333 inset,
+      0 0 0 20px #222 inset,
+      0 38px 0px -17px #444 inset,
+      0 -38px 0px -17px #444 inset,
+      0 0 0 21px #333 inset,
+      0 0 0 22px #222 inset,
+      0 0 0 23px #333 inset,
+      0 39px 0px -15px #444 inset, 
+      0 -39px 0px -15px #444 inset, 
+      0 0 0 24px #222 inset,
+      0 0 0 25px #333 inset,  
+      0 0 0 26px #222 inset,
+      0 40px 0px -13px #444 inset,
+      0 -40px 0px -13px #444 inset,
+      0 0 0 27px #333 inset,
+      0 0 0 28px #222 inset,
+      0 0 0 29px #333 inset,
+      0 41px 0px -11px #444 inset,
+      0 -41px 0px -11px #444 inset,
+      0 0 0 30px #222 inset,
+      0 0 0 43px #333 inset,
+      0 0 0 45px #AF2A10 inset,
+      0 0 0 47px #333 inset,
+      0 0 0 62px #AF2A10 inset,
+      0 0 10px 78px rgba(0,0,0,0.5) inset;
+  }
+
+.rotate {
+    -webkit-animation: rotation 2s infinite linear;
+    animation-play-state: running;
+}
+
+.paused {
+    -webkit-animation-play-state: paused;
+    -moz-animation-play-state: paused;
+    -o-animation-play-state: paused;
+    animation-play-state: paused;
+}
+
+@-webkit-keyframes rotation {
+    from {
+            -webkit-transform: rotate(0deg);
+    }
+    to {
+            -webkit-transform: rotate(359deg);
+    }
+}
+
+/* track artist */
+.song-artist {
+    position: absolute;
+    z-index: 4;
+    color: rgb(193, 255, 6);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    bottom: 21%;
+    left: 28%;
+}
+
+/* track title */
+.song-title {
+    position: absolute;
+    z-index: 4;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    bottom: 16%;
+    left: 28%;
+}
+
+/* style for play and pause images */
+#play-pause {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    filter: invert(1);
+    cursor: pointer;
+    bottom: 15%;
+    z-index: 4;
+    font-size: 53px;
+    left: 9%;
+}
+
+#play-pause:hover {
+    filter: contrast(160%);
+}
+
+/* style for next and previous song images */
+#next-song, #previous-song {
+    position: absolute;
+    height: 30px;
+    width: 30px;
+    filter: invert(1);
+    cursor: pointer;
+    bottom: 13.5%;
+    font-size: 40px;
+    z-index: 4;
+}
+
+/* unique style for next song image */
+#next-song {
+    right: 10%;
+}
+#next-song:hover {
+    filter: contrast(160%);
+}
+
+/* unique style for previous song image */
+#previous-song {
+    right: 10.3%;
+    bottom: 21.5%;
+}
+#previous-song:hover {
+    filter: contrast(160%);
+}
+
+/* style for current time of the track */
+.currentTime {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    bottom: -7.5%;
+    left: 17%;
+    z-index: 4;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    color: white;
+    align-items: center;
+}
+
+/* style for the total length of the track */
+.durationTime {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    bottom: -1%;
+    right: 11%;
+    z-index: 4;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    align-items: center;
+    color: rgb(193, 255, 6);
+}
+
+/* style for the progress bar */
+#progress-bar {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    z-index: 4;
+    height: 5px;
+    background: #000000;
+    width: 160pt;
+    bottom: 5%;
+    border-radius: 30px;
+    left: 17%;
+}
+
+/* style for the progress bar's slider thumb */
+#progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    margin-top: -3px;
+    margin-left: 0px;
+    height: 10px;
+    width: 7px;
+    border: 0;
+    background: -webkit-linear-gradient(45deg,  rgb(213, 213, 213), rgb(193, 255, 6));
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+/* style for the progress bar's runnable track */
+#progress-bar::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+    max-height: 5px;
+    border-radius: 30px;
+}
+
+/* style to remove blue shade of the progress bar when clicked on/selected */
+#progress-bar:focus {
+    outline: none;
+}

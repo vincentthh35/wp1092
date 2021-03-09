@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Music Player</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <img src="./assets/images/violet_evergarden.jpg" id="background" />
+        <audio id="song">
+            <source src="./assets/music/will_true.mp3" type="audio/mp3">
+            <source src="./assets/music/will_true.ogg" type="audio/ogg">
+        </audio>
+        <div class="container">  
+            <div class="box"></div>      
+            <!-- <img src="./assets/images/violet_evergarden.jpg" id="thumbnail" /> -->
+            <div id="disc"></div>
+            <img src="./assets/icons/play.png" onclick="playPause()" id="play-pause" />
+            <img src="./assets/icons/forward.png" onclick="nextSong()" id="next-song" />
+            <img src="./assets/icons/backward.png" onclick="previousSong()" id="previous-song" />
+    
+            <div class="song-artist">TRUE</div>
+            <div class="song-title">Will </div>
+    
+            <!-- Input element for progress bar - min=0 starting value of every song - max length will change per song so leave empty -->
+            
+            <input 
+                type="range" 
+                id="progress-bar" 
+                min="0" 
+                max="" 
+                value="0" 
+                onchange="changeProgressBar()"
+            />
+    
+            <div class="currentTime"></div>
+            <div class="durationTime"></div>
+        </div>
+    
+        <script src="player.js"></script>
+</body>
