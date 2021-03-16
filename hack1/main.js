@@ -55,5 +55,7 @@ comment_input.addEventListener('focus', () => {
 let cancel_button = document.getElementById('cancel-button');
 cancel_button.addEventListener('click', () => {
     comment_input.value = '';
+    comment_button.disabled = true;
+    comment_button.style['background-color'] = '#cccccc';
     comment_group.style.visibility = 'hidden';
 });
