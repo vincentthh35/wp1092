@@ -6,4 +6,3 @@ ReactDOM.render(
     <TodoApp className="todo-app__root" />,
     document.getElementById("root")
 );
-
