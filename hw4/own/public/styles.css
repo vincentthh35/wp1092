@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+}
+
+.vsc-initialized {
+    margin: 0px;
+}
+
+/*  MainSection */
+.main-section {
+    display: flex;
+    justify-content: flex-start;
+}
+.outer-top {
+    width: 100%;
+    background-color: #707070;
+    display: flex;
+    flex-direction: row;
+}
+
+#empty-block {
+    width: 64px;
+    height: 36px;
+}
+
+#up-add-delete {
+
+}
+#side-add-delete {
+    background-color: #707070;
+}
+
+/* Button */
+.top-add-del-button {
+    border: none;
+    background-color: none;
+    display: inline-block;
+    height: 36px;
+    width: 36px;
+}
+
+.side-add-del-button {
+    border: none;
+    background-color: #f9d9a7;
+    display: inline-block;
+    height: 36px;
+    width: 64px;
+}
+
+/* Header */
+#tool-bar {
+    display: flex;
+    flex-direction: row;
+    background-color: #8d8590;
+}
+
+#tool-bar > .tool {
+    display: inline-block;
+    float: left;
+    padding: 12px;
+    color: #e8e8e8;
+    text-align: center;
+    width: 64px;
+}
+
+#tool-bar > .tool:hover {
+    background-color: #726278;
+}
