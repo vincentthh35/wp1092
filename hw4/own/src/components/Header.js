@@ -1,7 +1,8 @@
 import React from "react";
-export default () => (
+export default ({ resetAll, unfocus, giveColor }) => (
     <div id='tool-bar'>
-        <div className="tool">tool1</div>
-        <div className="tool">tool2</div>
+        <div className="tool" onClick={resetAll}>Reset</div>
+        <div className="tool" onClick={unfocus}>Unfocus</div>
+        <div className="tool" onClick={giveColor}>Color</div>
     </div>
 )

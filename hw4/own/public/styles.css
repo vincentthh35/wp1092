@@ -10,57 +10,197 @@
 .main-section {
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
+    width: 100%
 }
+
+.no-wrap {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+
 .outer-top {
     width: 100%;
-    background-color: #707070;
+    background-color: #d4ced4;
+    display: flex;
+    flex-direction: row;
+
+    position: sticky;
+    left: 0px;
+    top: 48px;
+}
+
+.outer-side {
+    width: 36px;
+    height: calc(100vh - 48px - 36px);
+    background-color: #d4ced4;
+    background-size: cover;
+
+    position: sticky;
+    left: 0px;
+    top: calc(48px + 36px);
+}
+
+#empty-block {
+    width: 36px;
+    height: 36px;
+    background-color: #FFFFFF;
+}
+
+/* Button */
+.add-del-button {
+    border: none;
+    background-color: #d4ced4;
+    display: inline-block;
+    height: 36px;
+    width: 36px;
+    font-size: 16px;
+}
+
+.add-del-button:hover {
+    background-color: #536177;
+}
+
+.add-del-button:focus {
+    outline: 0;
+}
+
+/* spread-sheet */
+.spread-sheet {
+    overflow: auto;
+    width: calc(100vw - 36px);
+    height: calc(100vh - 36px - 48px);
+}
+
+#blank-table-index {
+    width: 60px;
+    height: 32px;
+    background-color: #FFFFFF;
+    background-color: #ececec;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: #dadada;
+    flex-shrink: 0;
+    position: sticky;
+    left: 0px;
+    top: 0px;
+    z-index: 10;
+}
+
+.index-row {
+    position: sticky;
+    top: 0px;
+    z-index: 2;
+}
+
+.up-table-index {
+    width: 100px;
+    height: 32px;
+    flex-shrink: 0;
+    text-align: center;
+    line-height: 32px;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: #dadada;
+    background-color: #ececec;
+    color: #797979;
+
+    position: sticky;
+    top: 0px;
+}
+
+.side-table-index {
+    width: 60px;
+    height: 32px;
+    flex-shrink: 0;
+    text-align: center;
+    line-height: 32px;
+    background-color: #ececec;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: #dadada;
+    color: #797979;
+    z-index: 1;
+    position: sticky;
+    left: 0px;
+}
+
+.selected-index {
+    background-color: #c2c2c2;
+    color: #575757;
+}
+
+.table-row {
     display: flex;
     flex-direction: row;
 }
 
-#empty-block {
-    width: 64px;
-    height: 36px;
+.basic-block {
+    width: 100px;
+    height: 32px;
+    border-style: solid;
+    border-width: 1.5px;
+    border-color: #dadada;
+    flex-shrink: 0;
+    line-height: 32px;
+    font-family: sans-serif;
+    font-size: 15px;
+    text-align-last: right;
+    padding-right: 5px;
+    /* z-index: -5; */
 }
 
-#up-add-delete {
-
+.no-border {
+    border-top: 0px;
+    border-bottom: 0px;
+    border-right: 0px;
 }
-#side-add-delete {
-    background-color: #707070;
+
+.basic-block-focus {
+    outline-style: solid;
+    outline-color: #75b1ff;
+    outline-width: 3px;
+    position: relative;
+    z-index: 0;
+    line-height: 32px;
 }
 
-/* Button */
-.top-add-del-button {
-    border: none;
-    background-color: none;
+div:focus {
+    outline: 0px solid transparent;
+}
+
+input {
     display: inline-block;
-    height: 36px;
-    width: 36px;
-}
+    height: 29px;
+    width: 97px;
+    border-style: none;
+    border-color: #75b1ff;
+    outline-style: none;
+    text-align-last: left;
 
-.side-add-del-button {
-    border: none;
-    background-color: #f9d9a7;
-    display: inline-block;
-    height: 36px;
-    width: 64px;
 }
 
 /* Header */
 #tool-bar {
-    display: flex;
+    display: block;
     flex-direction: row;
     background-color: #8d8590;
+    height: 48px;
+
+    position: sticky;
+    left: 0px;
+    top: 0px;
 }
 
 #tool-bar > .tool {
     display: inline-block;
     float: left;
-    padding: 12px;
     color: #e8e8e8;
+    line-height: 48px;
     text-align: center;
-    width: 64px;
+    font-size: 15px;
+    width: 72px;
 }
 
 #tool-bar > .tool:hover {

@@ -1,4 +1,16 @@
-# Getting Started with Create React App
+### Web Programming Practice Homework \#4
+
+##### B07902055 謝宗晅
+
+我有實作功能的如下：
+1. 所有基礎功能
+2. 除了「新增/刪除欄/列時，跟著調整公式的內容」，以及「複製貼上功能」之外，所有的進階功能（在公式方面我使用的套件應該可以支援更多的公式，不只是 `SUM, +-*/` 等等的）
+3. 額外的部份，我加了三個按鈕，
+    * Reset 按鈕可以 reset spreadsheet
+    * Unfocus 按鈕可以將目前所選擇/focus on的狀態清掉（因為 google spreadsheet 的那個選擇會一直在那邊，但我覺得沒有取消藍色框框的功能有點不舒服所以就加了這個功能）
+    * Color 按鈕可以將目前所選擇/focus on的 cell 隨機賦予他一個顏色，請享受一下隨機顏色的美好吧
+
+<!-- # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -67,4 +79,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
