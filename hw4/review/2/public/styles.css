@@ -1,0 +1,131 @@
+* {
+    box-sizing: border-box;
+}
+ 
+.top-header{
+    position: fixed;
+    width: 100%;
+    height: 25px;
+    top: 5px;
+    box-shadow: -5px rgb(151, 146, 146);
+    background-color: rgb(192, 188, 188)
+}
+
+.left-header{
+    position: fixed;
+    top: 5px;
+    bottom: 0px;
+    width: 25px;
+    box-shadow: -4px 0px  rgb(151, 146, 146);
+    background-color: rgb(192, 188, 188)
+}
+
+.sheet-main{
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    flex: 1;
+    overflow: auto;
+    width: 100%; 
+    height: 100%;
+}
+
+.chosen-box{
+    border-color: blue;
+    border-width: 2px;
+}
+
+.selected-header{
+    background-color: rgb(112, 106, 106);
+}
+
+
+.gg-minus-r,
+.gg-add-r {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    transform: scale(var(--ggs,1));
+    border-radius: 4px
+}
+
+.gg-minus-r:after,
+.gg-minus-r:before,
+.gg-add-r::after,
+.gg-add-r::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 5px;
+    top: 8px;
+    left: 4px
+}
+
+.gg-add-r::after {
+    width: 2px;
+    height: 10px;
+    top: 4px;
+    left: 8px
+}
+
+#top-add{
+    position: absolute;
+    left:60px;
+}
+
+#top-minus{
+    position: absolute;
+    left: 90px;
+}
+
+#left-add{
+    position: absolute;
+    top: 50px;
+}
+
+#left-minus{
+    position: absolute;
+    top: 80px;
+}
+
+table {
+    border-collapse: collapse;
+    border: 2px solid rgb(200,200,200);
+}
+  
+td, th {
+    border: 1px solid rgb(190,190,190);
+    min-width: 140px;
+    min-height: 30px;
+    max-width: 140px;
+    max-height: 30px;
+}
+
+td{
+    font-size: 13px;
+    text-align: center;
+}
+
+th{
+    background-color: rgb(235,235,235);
+}
+  
+caption {
+    padding: 10px;
+}
+
+input{
+    border: none;
+    outline: none;
+    border-color: transparent;
+    width: 100px;
+    height: 15px;
+}
+
