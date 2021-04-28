@@ -11,7 +11,7 @@ function roughScale(x, base) {
   return parsed
 }
 
-// nothing needed to do here, just getNumber to set a number.
+// Just call getNumber(true) to generate a random number for guessing game
 router.post('/start', (_, res) => {
   getNumber(true)
 
@@ -22,11 +22,14 @@ router.get('/guess', (req, res) => {
   const number = getNumber()
   const guessed = roughScale(req.query.number, 10)
 
-  if (guessed !== 0 && !guessed) {
-    res.status(500).send({ msg: 'No number provided.' })
+  // check if NOT a num or not in range [1,100]
+  if (!guessed || guessed < 1 || guessed > 100) {
+    res.status(400).send({ msg: 'Not a legal number.' })
   }
-
-  // TODO: checked if number and guessed are the same, response with some hint
+  else {
+  // TODO: check if number and guessed are the same,
+  // and response with some hint "Equal", "Bigger", "Smaller"
+  }
 })
 
 // TODO: add router.post('/restart',...)

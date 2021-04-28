@@ -11,6 +11,8 @@ const startGame = async () => {
 }
 
 const guess = async (number) => {
+  // TODO: Change this to catch error
+  // The error message should be: Error: "xx" is not a valid number (1 - 100)
   const {
     data: { msg }
   } = await instance.get('/guess', { params: { number } })
