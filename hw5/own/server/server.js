@@ -34,6 +34,33 @@ if (isProduction) {
     })
 }
 
+// logging
+import { existsSync, writeFile, mkdir } from 'fs'
+import getTimeString from './core/getTimeString'
+import getNumber from './core/getNumber'
+
+// check if folder exists:
+if (!existsSync('./server/log/')) {
+    // create log folder
+    mkdir('./server/log', (error) => { if (error) { console.log(error); }})
+}
+
+// create a new log file
+// let current_time = getTimeString();
+// writeFile(
+//     `./server/log/${current_time}.log`,
+//     `start number=${getNumber()} ${current_time}`,
+//     (error) => {
+//         if (error) {
+//             console.log(error);
+//         } else {
+//             console.log(`create file: ./server/log/${current_time}.log`);
+//         }
+//     }
+// );
+//
+// export const filename = `./server/log/${current_time}`
+
 app.listen(port, () => {
     console.log(`Server is up on port ${port}.`)
 })

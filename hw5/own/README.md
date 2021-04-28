@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+### Web Programming HW5
+##### B07902055 謝宗晅
+* 實作了所有基礎和進階功能
+* 額外功能：
+    * focus 在 input field 上的時候支援按 Enter 來送出 request
+    * 送出一樣的數字的話就會被擋在前端，不會把 request 送到後端（好像是本來的 TODO，但不知道為什麼在新版裡面消失了）
+<!-- # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -67,4 +73,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `yarn build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
