@@ -1,0 +1,113 @@
+.window-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 8vh;
+}
+
+.panel-container {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.base-button {
+    color: #ffffff;
+    font-size: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: none;
+    border-radius: 10px;
+    height: 60px;
+    width: 90px;
+    vertical-align: middle;
+    outline: 0;
+}
+
+.base-button:disabled {
+    background-color: #717171 !important;
+}
+
+.base-button:active {
+    transform: scale(0.98);
+}
+
+.base-input {
+    width: 140px;
+    height: 30px;
+    font-size: 15px;
+    outline: none;
+    padding-left: 6px;
+}
+
+.name-subject-score {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 470px;
+}
+
+#clear-button {
+    background-color: #e65365;
+    line-height: 20px;
+    font-size: 20px;
+}
+
+#add-button {
+    background-color: #9dc87f;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 18px;
+}
+
+#query-button {
+    background-color: #6f98bd;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 16px;
+}
+
+#query-input {
+    width: 300px;
+}
+
+#controller {
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #fabb78;
+    font-size: 16px;
+    width: 110px;
+    height: 40px;
+}
+
+#sort {
+    height: 40px;
+    line-height: 40px;
+    font-size: 17px;
+    background-color: #9e6abf;
+}
+
+.radio-group {
+    display: flex;
+    width: 270px;
+    justify-content: space-between;
+}
+
+textarea {
+    width: 584px;
+    height: 300px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    resize: none;
+    outline: none;
+    padding: 7px;
+}
