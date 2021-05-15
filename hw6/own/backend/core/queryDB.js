@@ -23,7 +23,6 @@ const queryDB = async (query, queryMode) => {
             const message = parseQueryMessage(ret);
             if (message === '') {
                 return Promise.reject(`Subject (${query}) not found!`);
-                // throw new Error(`Subject (${query}) not found!`);
             } else {
                 return message;
             }

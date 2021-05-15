@@ -6,11 +6,9 @@ import queryDB from '../core/queryDB.js';
 const router = express.Router();
 
 router.delete('/clearDB', (_, res) => {
-    console.log('clearDB');
     clearDB()
         .then(ret => res.json({ msg: ret }))
         .catch(error => res.status(500).send({ msg: error }));
-    // console.log(res.res);
 });
 
 router.post('/addDB', (req, res) => {

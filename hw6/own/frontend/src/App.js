@@ -45,12 +45,10 @@ function App() {
     }
 
     const updateLog = (new_log) => {
-        console.log(new_log);
         setLog(new_log);
         setCanSort(true);
 
         let line_number = new_log.split('\n').length - 1;
-        console.log(new_log.split('\n').slice(0, 10).join('\n'));
         setMaxPage( Math.ceil(line_number / 10) );
         updatePage(1, new_log);
         // setDisplayLog(new_log.split('\n').slice(0, 10).join('\n'));
