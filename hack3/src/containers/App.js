@@ -38,7 +38,8 @@ function App() {
   const calculateDistance = async () => {
     // send start and end stations to backend and get distance
     // coding here ...
-    const res = await instance.get(`/calculateDistance?start=${start_station}&end=%${end_station}`)
+    const res = await instance.get(`/calculateDistance?start=${start_station}&end=${end_station}`)
+    setDistance(res.data.distance)
   }
 
   const handleClick = (e) => {
@@ -63,7 +64,15 @@ function App() {
 } else {
     let route_graph = Object.keys(data).map(e => <RouteGraph route_data={data[e]} />)
 }
-
+    let distance_class = "";
+    let distance_display;
+    if (distance === -2) {
+        distance_display = ""
+    } else if (distance === -1) {
+        distance_class = 'invalid'
+    } else {
+        distance_display = distance;
+    }
   return (
     <div className="wrapper">
         <div className="welcome-title"><h1>Welcome to MRT Distance Calculator !</h1></div>
@@ -76,7 +85,7 @@ function App() {
                     {
                         // generate options of all stations within option group
                         // coding here ...
-                        Object.keys(data).map(e => <optgroup label={e} key={`opts-${e}`}>{data[e].map( ee => <option id={`start-group-${ee.station_id}`} key={`sg-${ee.station_id}`}>{ee.station_name}</option> )}</optgroup>)
+                        Object.keys(data).map(e => <optgroup label={e} key={`opts-${e}`}>{data[e].map( ee => <option id={`start-group-${ee.station_id}`} key={`sg-${ee.station_id}`} value={ee.station_id}>{ee.station_name}</option> )}</optgroup>)
                     }
                 </select>
 
@@ -86,13 +95,13 @@ function App() {
                     {
                         // generate options of all stations within option group
                         // coding here ...
-                        Object.keys(data).map(e => <optgroup label={e} key={`opte-${e}`}>{data[e].map( ee => <option id={`end-group-${ee.station_id}`} key={`eg-${ee.station_id}`}>{ee.station_name}</option> )}</optgroup>)
+                        Object.keys(data).map(e => <optgroup label={e} key={`opte-${e}`}>{data[e].map( ee => <option id={`end-group-${ee.station_id}`} key={`eg-${ee.station_id}`} value={ee.station_id}>{ee.station_name}</option> )}</optgroup>)
                     }
                 </select>
 
                 <button onClick={calculateDistance} id="search-btn">查詢距離</button>
-                <span id="answer"> {/* you should add className to attributes */}
-                    {distance}
+                <span id="answer" className={distance_class}> {/* you should add className to attributes */}
+                    {distance_display}
                 </span>
                 <span id="answer-postfix">KM</span>
             </div>
