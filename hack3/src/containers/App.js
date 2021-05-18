@@ -70,6 +70,7 @@ function App() {
         distance_display = ""
     } else if (distance === -1) {
         distance_class = 'invalid'
+        distance_display = "INVALID"
     } else {
         distance_display = distance;
     }
