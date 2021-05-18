@@ -40,10 +40,12 @@ function App() {
     // coding here ...
     const res = await instance.get(`/calculateDistance?start=${start_station}&end=${end_station}`)
     setDistance(res.data.distance)
+    if (res.status !== 200) {
+        console.log(res);
+    }
   }
 
   const handleClick = (e) => {
-      console.log(e.target.id.split('-')[1]);
       const station_id = e.target.id.split('-')[1];
       setCurrentStationId(station_id);
   }

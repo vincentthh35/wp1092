@@ -1,7 +1,7 @@
 import Station from '../models/station'
 
 const tidyUpData = (data, result) => {
-    console.log(data);
+    // console.log(data);
   // process data from mongo and return correct form of data
   // the data form should be like this:
   // data = {
@@ -128,8 +128,6 @@ const CalculateDistance = async (req, res) => {
   try {
     const start = req.query.start // get parameter from frontend
     const end = req.query.end // get parameter from frontend
-    // console.log(req);
-    // console.log(end);
 
     // fetch data from mongo
     // coding here ...
