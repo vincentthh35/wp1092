@@ -13,7 +13,7 @@ yarn.lock
 /cypress/fixtures
 /cypress/videos
 /cypress/integration/examples
-/cypress/
+/cypress/screenshots
 
 # production
 /build
