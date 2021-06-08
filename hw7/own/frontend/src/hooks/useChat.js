@@ -1,13 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
-const useChat = ({ me, displayStatus, createChatBox, setReceivedMessage, recoverHistory }) => {
-    // const [messages, setMessages] = useState([]);
+const useChat = ({ me, displayStatus, createChatBox, setReceivedMessage }) => {
     const client = useRef(null);
-    // const client = new WebSocket('ws://localhost:8080');
-
-    // const handleMessage = (message) => {
-    //     receiveMessage(message);
-    // }
 
     const createSocket = (name) => {
         const client = new WebSocket('ws://localhost:8080');
@@ -43,45 +37,12 @@ const useChat = ({ me, displayStatus, createChatBox, setReceivedMessage, recover
         return client;
     };
 
-    useEffect(() => {
-        client.current = new WebSocket('ws://localhost:8080');
-        client.current.onmessage = (bytestring) => {
-            const { data } = bytestring;
-            const payload = JSON.parse(data);
-            payload.data.type = payload.type;
-            switch (payload.type) {
-                case 'CHAT':
-                    console.log(payload.data.messages);
-                    // initChatBox(payload.data.messages);
-                    // createChatBox(payload.data.name, payload.data.messages);
-                    setReceivedMessage(payload.data);
-                    // setMessages(() => [...messages, ...payload.data.messages]);
-                    break;
-                case 'MESSAGE':
-                    console.log(payload.data.message);
-                    // must append the message to active chatroom
-                    // handleMessage(payload.data.message);
-                    setReceivedMessage(payload.data);
-                    break;
-                default:
-                    break;
-            }
-        };
-        client.current.onopen = () => {
-            recoverHistory();
-        };
-        return () => client.current.close();
-    }, [])
-
     const sendData = async (data) => {
         if (client.current.readyState !== 1) {
-            console.log('AAA');
             return;
         }
         await client.current.send(JSON.stringify(data));
         return client.current.readyState;
-        // await client.current.send(JSON.stringify(data));
-        // return client.current.readyState;
     };
 
     const sendMessage = async (payload) => {
@@ -94,28 +55,11 @@ const useChat = ({ me, displayStatus, createChatBox, setReceivedMessage, recover
         console.log(payload);
         let ret;
         switch (payload.type) {
+            case 'INIT':
+            case 'CLOSE':
             case 'MESSAGE':
-                ret = await sendData({
-                    type: 'MESSAGE',
-                    data: {
-                        name: payload.data.name,
-                        to: payload.data.to,
-                        body: payload.data.body,
-                    },
-                });
-                if (ret === 1) {
-
-                }
-                return (ret === 1) ? 0 : -1;
             case 'CHAT':
-                ret = await sendData({
-                    type: 'CHAT',
-                    data: {
-                        name: payload.data.name,
-                        to: payload.data.to,
-                        body: '', // ?
-                    },
-                });
+                ret = await sendData(payload);
                 return (ret === 1) ? 0 : -1;
             default:
                 console.log('incorrect payload:');
@@ -124,7 +68,44 @@ const useChat = ({ me, displayStatus, createChatBox, setReceivedMessage, recover
         }
     };
 
-    return { sendMessage, createSocket };
+    useEffect(() => {
+        client.current = new WebSocket('ws://localhost:8080');
+        client.current.onerror = (e) => {
+            console.error(e);
+            displayStatus({
+                type: 'error',
+                msg: 'WebSocket error, please check log for more detail (server is possibly down)'
+            });
+        };
+        client.current.onmessage = (bytestring) => {
+            const { data } = bytestring;
+            const payload = JSON.parse(data);
+            payload.data.type = payload.type;
+            switch (payload.type) {
+                case 'INIT':
+                case 'CHAT':
+                case 'MESSAGE':
+                    setReceivedMessage(payload.data);
+                    break;
+                default:
+                    break;
+            }
+        };
+        client.current.onopen = async () => {
+            console.log('connection');
+            const ret = await sendMessage({
+                type: 'INIT',
+                data: {
+                    name: me,
+                },
+            });
+            if (ret === 0) displayStatus({ type: 'success', msg: 'Successfully recover chat box history' });
+            else displayStatus({ type: 'error', msg: 'Error when sending chat box recover message' });
+        };
+        return () => client.current.close();
+    }, []);
+
+    return { sendMessage };
 };
 
 export default useChat;

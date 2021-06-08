@@ -102,9 +102,42 @@ wss.on('connection', function connection(client) {
     message = JSON.parse(message);
 
     const { type } = message;
-    console.log(type);
 
     switch (type) {
+      // on init chat box (recover history)
+      case 'INIT': {
+            const {
+                data: { name },
+            } = message;
+
+            const sender = await validateUser(name);
+            let chat_box_key_list = [];
+            // await cannot be used in forEach
+            for (const id of sender.chatBoxes) {
+                const result = await ChatBoxModel.findOne({ '_id': id });
+                chat_box_key_list.push(result.name);
+            }
+            client.sendEvent({
+                type: 'INIT',
+                data: {
+                    chatBoxes: chat_box_key_list,
+                },
+            });
+            break;
+      }
+      // on close chat box
+      case 'CLOSE': {
+          const {
+              data: { name, key }
+          } = message;
+
+          const sender = await validateUser(name);
+          const chatBox = await validateChatBox(key, []);
+          const newChatBoxes = sender.chatBoxes.filter((c) => !c.equals(chatBox._id))
+          sender.chatBoxes = newChatBoxes;
+          await sender.save();
+          break;
+      }
       // on open chat box
       case 'CHAT': {
         const {
@@ -116,6 +149,16 @@ wss.on('connection', function connection(client) {
         const sender = await validateUser(name);
         const receiver = await validateUser(to);
         const chatBox = await validateChatBox(chatBoxName, [sender, receiver]);
+        // add chat box history in user model
+        // if exists
+        let exist = false;
+        sender.chatBoxes.forEach((c) => {
+            if (c.equals(chatBox._id)) exist = true;
+        });
+        if (!exist) {
+            sender.chatBoxes.push(chatBox)
+            await sender.save();
+        }
 
         // if client was in a chat box, remove that.
         if (chatBoxes[client.box]){

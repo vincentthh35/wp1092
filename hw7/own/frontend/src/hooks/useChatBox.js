@@ -37,7 +37,6 @@ const useChatBox = ({ me, activeKey }) => {
             // not exist, add
             newChatBoxes.push({ friend, key: newKey, chatLog });
         }
-        console.log(newChatBoxes);
         setChatBoxes(newChatBoxes);
         return newChatBoxes;
     };
@@ -67,7 +66,6 @@ const useChatBox = ({ me, activeKey }) => {
     };
 
     const appendMessage = (message, name=undefined, target=undefined) => {
-        console.log(target);
         const newChatBoxes = [...chatBoxes];
         let targetKey;
         if (name !== undefined) {
@@ -82,9 +80,6 @@ const useChatBox = ({ me, activeKey }) => {
         chatBoxes.forEach(({ key }, i) => {
             if (key === targetKey) index = i;
         });
-        console.log(activeKey);
-        console.log(targetKey);
-        console.log(message);
         if (name !== undefined) {
             newChatBoxes[index].chatLog.push(...message);
         } else {

@@ -1,5 +1,5 @@
 import '../App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Tabs, Input } from 'antd';
 import ChatModal from '../Components/ChatModal';
 import useChatBox from '../hooks/useChatBox';
@@ -15,39 +15,29 @@ const ChatRoom = ({ me, displayStatus }) => {
     const [activeKey, setActiveKey] = useState('');
     const [messageTo, setMessageTo] = useState('');
     const [receivedMessage, setReceivedMessage] = useState({});
+    const scrollRef = useRef(null);
     const { chatBoxes, createChatBox, removeChatBox, appendMessage, validChatBox } = useChatBox({ me, activeKey });
-    const recoverHistory = () => {
-        const his = JSON.parse(localStorage.getItem(CHAT_HIS_KEY));
-        console.log(his);
-        if (his) {
-            // recover history
-            console.log('AA');
-            his.forEach((key) => {
-                updateActiveKey(key);
-            });
-        }
-    }
-    const { sendMessage, createSocket } = useChat({ me, displayStatus, createChatBox, setReceivedMessage, recoverHistory });
+    const { sendMessage } = useChat({ me, displayStatus, createChatBox, setReceivedMessage });
 
     const addChatBox = () => {
         setModalVisible(true);
     };
 
     const handleReceive = (message) => {
-        console.log(`receive: ${message}`);
-        console.log(activeKey);
         appendMessage(message, undefined, activeKey);
     };
-
 
     useEffect(() => {
         if (!receivedMessage.type) {
             return;
         }
         switch (receivedMessage.type) {
+            case 'INIT':
+                // recover history
+                receivedMessage.chatBoxes.forEach((key) => updateActiveKey(key));
+                break;
             case 'CHAT':
                 const newChatBoxes = createChatBox(receivedMessage.name, receivedMessage.messages);
-                console.log(newChatBoxes);
                 localStorage.setItem(CHAT_HIS_KEY, JSON.stringify(newChatBoxes.map(({ key }) => key)));
                 break;
             case 'MESSAGE':
@@ -55,6 +45,17 @@ const ChatRoom = ({ me, displayStatus }) => {
                 break;
         }
     }, [receivedMessage]);
+
+    useEffect(() => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollIntoView();
+            // {
+            //     behavior: "smooth",
+            //     block: "nearest",
+            //     inline: "start",
+            // }
+        }
+    });
 
     const extractTo = (key) => {
         if (key === '') {
@@ -69,18 +70,23 @@ const ChatRoom = ({ me, displayStatus }) => {
     };
 
     const updateActiveKey = async (newActiveKey) => {
-        console.error(`updateActiveKey(${newActiveKey})`);
         const newTo = extractTo(newActiveKey);
         setActiveKey(newActiveKey);
         setMessageTo(newTo);
-        const ret = await sendMessage({
-            type: 'CHAT',
-            data: {
-                name: me,
-                to: newTo
-            }
-        });
-        if (ret !== 0) displayStatus({ type: 'error', msg: 'Error connecting to server! Please refresh this page or restart the server!' })
+        if (newTo !== '') {
+            const ret = await sendMessage({
+                type: 'CHAT',
+                data: {
+                    name: me,
+                    to: newTo
+                }
+            });
+            if (ret !== 0)
+                displayStatus({
+                    type: 'error',
+                    msg: 'Error connecting to server! Please refresh this page or restart the server!'
+                });
+        }
     };
 
     const handleSend = (message) => {
@@ -99,7 +105,14 @@ const ChatRoom = ({ me, displayStatus }) => {
         });
     }
 
-    const handleCloseTab = (targetKey) => {
+    const handleCloseTab = async (targetKey) => {
+        const ret = await sendMessage({
+            type: 'CLOSE',
+            data: {
+                name: me,
+                key: targetKey,
+            },
+        });
         updateActiveKey(removeChatBox(targetKey));
     };
 
@@ -120,7 +133,10 @@ const ChatRoom = ({ me, displayStatus }) => {
                         ({ friend, key, chatLog }) => {
                             return (
                                 <TabPane tab={friend} key={key} closable={true}>
-                                    <div className='overflow'>{renderChatLog(chatLog)}</div>
+                                    <div className='overflow'>
+                                        {renderChatLog(chatLog)}
+                                        <div ref={scrollRef}/>
+                                    </div>
                                 </TabPane>
                             );
                         }
@@ -139,15 +155,7 @@ const ChatRoom = ({ me, displayStatus }) => {
                         const newKey = (me <= name)
                             ? `${me}_${name}`
                             : `${name}_${me}`;
-                        console.log(newKey);
                         updateActiveKey(newKey);
-                        // await sendMessage({
-                        //     type: 'CHAT',
-                        //     data: {
-                        //         name: me,
-                        //         to: name
-                        //     }
-                        // });
                     }}
                     onCancel={() => {
                         setModalVisible(false);
@@ -171,9 +179,7 @@ const ChatRoom = ({ me, displayStatus }) => {
                 autoSize
                 allowClear
                 onPressEnter={async (e) => {
-                    console.log(e);
                     let msg = messageInput
-                    console.log(messageInput);
                     if (!msg) {
                         displayStatus({
                             type: 'error',
@@ -195,7 +201,6 @@ const ChatRoom = ({ me, displayStatus }) => {
                             body: msg
                         }
                     });
-                    console.log(ret);
                     if (ret === 0) displayStatus({ type: 'success', msg: 'Message successfully sent'});
                     else displayStatus({ type: 'error', msg: 'Eror when sending message' });
                     setMessageInput('');
