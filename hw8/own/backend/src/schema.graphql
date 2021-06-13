@@ -1,0 +1,54 @@
+type Query {
+    user(name: String): User!
+    messages(chatBoxId: ID, chatBoxName: String): [Message!]
+}
+
+type Mutation {
+    createUser(name: String): User!
+    createChatBox(name1: String, name2: String): ChatBox!
+    appendMessage(name: String, to: String, body: String): ChatBox!
+    appendChatBoxToUser(name: String, chatBoxName: String): ChatBox!
+    removeChatBoxFromUser(name: String, chatBoxName: String): ChatBox!
+    readChatBox(name: String, chatBoxName: String): String
+}
+
+type Subscription {
+    user(name: String): newMessagePayload!
+}
+
+type User {
+    id: ID!
+    name: String!
+    chatBoxes: [ChatBox!]
+}
+
+type ChatBox {
+    id: ID!
+    name: String!
+    messages: [Message!]
+    aUnreadB: Int!
+    bUnreadA: Int!
+}
+
+type Message {
+    id: ID!
+    chatBox: ChatBox
+    sender: User!
+    body: String!
+}
+
+enum MutationType {
+    ADD_CHATBOX
+    REMOVE_CHATBOX
+    MESSAGE
+    READ
+}
+
+type newMessagePayload {
+    mutation: MutationType!
+    chatBoxName: String
+    message: Message
+    chatBox: ChatBox
+    aUnreadB: Int
+    bUnreadA: Int
+}

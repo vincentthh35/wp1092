@@ -1,0 +1,75 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 500px;
+  margin: auto;
+}
+
+.App-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.App-title h1 {
+  margin: 0;
+  margin-right: 20px;
+  font-size: 3em;
+}
+
+.App-messages {
+  width: 100%;
+  height: 300px;
+  background: #eeeeee52;
+  border-radius: 10px;
+  margin: 20px;
+  padding: 20px;
+  overflow: auto;
+}
+
+.message-content {
+    background-color: #e8e5e5;
+    color: #6a6767;
+    padding-left: 9px;
+    padding-right: 9px;
+    border-radius: 4px;
+    max-width: 300px;
+    overflow-wrap: break-word;
+}
+
+.sender {
+    padding-left: 8px;
+    padding-right: 8px;
+    font-weight: bold;
+}
+
+.message-wrapper {
+    display: flex;
+    flex-direction: row;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    min-height: 40px;
+    line-height: 30px;
+}
+
+.sent-by-other {
+    justify-content: flex-start;
+}
+
+.sent-by-me {
+    justify-content: flex-end;
+}
+
+.overflow {
+    overflow: auto;
+    max-height: 200px;
+}
+
+.unread-line {
+    text-align: center;
+    color: #6f6f6f;
+    font-weight: bold;
+}
