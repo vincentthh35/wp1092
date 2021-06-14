@@ -1,0 +1,13 @@
+{
+  "name": "own",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd frontend && npm start",
+    "server": "cd backend && npm run server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
