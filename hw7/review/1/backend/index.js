@@ -1,16 +1,18 @@
-const mongoose = require('mongoose');
-const http = require('http');
-const WebSocket = require('ws');
-const express = require('express');
-const path = require('path');
-const uuid = require('uuid');
-
-const mongo = require('./mongo');
-const dotenv = require('dotenv-defaults')
+import mongoose from 'mongoose'
+import http from 'http'
+import WebSocket from 'ws'
+import express from 'express'
+import path from 'path'
+import { v4 as uuid } from 'uuid'
+import mongo from './mongo.js'
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+import dotenv from "dotenv-defaults";
+dotenv.config();
 const app = express();
 
-
-dotenv.config()
 /* -------------------------------------------------------------------------- */
 /*                               MONGOOSE MODELS                              */
 /* -------------------------------------------------------------------------- */
@@ -84,12 +86,11 @@ const validateChatBox = async (name, participants) => {
 // })();
 
 const chatBoxes = {}; // keep track of all open AND active chat boxes
-
 wss.on('connection', function connection(client) {
-  client.id = uuid.v4();
+  client.id = uuid();
   client.box = ''; // keep track of client's CURRENT chat box
 
-  client.sendEvent = (e) => client.send(JSON.stringify(e));
+  client.sendEvent = (e) => {client.send(JSON.stringify(e))};
 
   client.on('message', async function incoming(message) {
     message = JSON.parse(message);
@@ -109,6 +110,11 @@ wss.on('connection', function connection(client) {
         const receiver = await validateUser(to);
         const chatBox = await validateChatBox(chatBoxName, [sender, receiver]);
 
+        // if client was in a chat box, remove that.
+        // if (chatBoxes[client.box])
+          // user was in another chat box
+          // chatBoxes[client.box].delete(client);
+
         // use set to avoid duplicates
         client.box = chatBoxName;
         if (!chatBoxes[chatBoxName]) chatBoxes[chatBoxName] = new Set(); // make new record for chatbox
@@ -122,7 +128,6 @@ wss.on('connection', function connection(client) {
               body,
             })),
             key: chatBoxName,
-            friend: to
           },
         });
 
@@ -154,8 +159,9 @@ wss.on('connection', function connection(client) {
                 name,
                 body,
               },
-              key: chatBoxName
+              key: chatBoxName,
             },
+            
           });
         });
       }
@@ -170,6 +176,6 @@ wss.on('connection', function connection(client) {
 
 mongo.connect();
 
-server.listen(8080, () => {
-  console.log('Server listening at http://localhost:8080');
+server.listen(4000, () => {
+  console.log('Server listening at http://localhost:4000');
 });

@@ -8,10 +8,7 @@
     "server": "cd backend && yarn server"
   },
   "dependencies": {
-    "dotenv-defaults": "^2.0.2",
-    "express": "^4.17.1",
-    "mongoose": "^5.12.13",
-    "uuid": "^8.3.2",
-    "ws": "^7.4.6"
+    "@ant-design/icons": "^4.6.2",
+    "antd": "^4.16.2"
   }
 }

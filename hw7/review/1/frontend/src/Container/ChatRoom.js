@@ -5,8 +5,8 @@ import ChatModal from "../Container/ChatModal";
 import useChatBox from "../hooks/useChatBox";
 import useChat from "../hooks/useChat";
 const { TabPane } = Tabs;
-const server = new WebSocket('ws://localhost:8080');
-server.onopen = () => console.log('Server connected on 8080.');
+const server = new WebSocket('ws://localhost:4000');
+server.onopen = () => console.log('Server connected.');
 server.sendEvent = (e) => server.send(JSON.stringify(e));
 const ChatRoom = ({ me, displayStatus}) => {
   const [messageInput, setMessageInput] = useState("");
@@ -15,10 +15,13 @@ const ChatRoom = ({ me, displayStatus}) => {
   const { chatBoxes, createChatBox, removeChatBox, onEvent} = useChatBox();
   const { sendMessage} = useChat();
   const addChatBox = () => { setModalVisible(true); };
-  server.onmessage = async (m) => {
-     await onEvent(JSON.parse(m.data), me, activeKey);
-  };
   
+
+  server.onmessage = (m) => {
+    console.log(JSON.parse(m.data))
+    onEvent(JSON.parse(m.data), me)
+  };
+
   return (
     <> <div className="App-title"><h1>{me}'s Chat Room</h1></div>
       <div className="App-messages">
@@ -34,33 +37,40 @@ const ChatRoom = ({ me, displayStatus}) => {
           {chatBoxes.map((
             { friend, key, chatLog }) => {
               return (
-                <TabPane
-                  tab={friend}
-                  key={key}
-                  closable={true}
-                >
-                  {chatLog.map(({body, name}) => {
-                    let chat_class = "chat-message-group" + ((me === name) ? " writer-user" : "");
-                    return(
-                      <div class="card-content chat-content">
-                        <div class="content">
-                          <div class={chat_class}>
-                            <div class="chat-messages">
-                                <div class="message">{body}</div>
-                                <div class="from">{name}</div>
-                            </div>
+                <TabPane tab={friend}
+                  key={key} closable={true}>
+                    {chatLog.map(({ body, name }) => {
+                      if (name === me){
+                        return (
+                          <div style={{ position: "relative"}}>
+                            <br></br>
+                            <p style={{ fontSize: 18, overflowWrap: 'break-word', position: "absolute", right: "0px" }}>
+                              <span style={{ border: "1px solid #80ffd4" }}>{body}</span>
+                              &nbsp;
+                              <span style={{ backgroundColor: "#80ffd4" }}>{name}</span></p>
+                            <br></br>
                           </div>
-                        </div>
-                      </div>
-                    )
-                  })}
+                        )
+                      }
+                      else{
+                        return (
+                          <div >
+                            <p style={{ fontSize: 18, overflowWrap: 'break-word' }}>
+                              <span style={{ backgroundColor: "#ffccff" }}>{name}</span>
+                              &nbsp;
+                              <span style={{ border: "1px solid #ffccff" }}>{body}</span>
+                            </p>
+                          </div>
+                        )
+                      }
+                    })}
                 </TabPane>
             );})}
         </Tabs>
         <ChatModal
           visible={modalVisible}
           onCreate={({ name }) => {
-            setActiveKey(createChatBox(server, name, me));
+            setActiveKey(createChatBox(name, me, server));
             setModalVisible(false);
           }}
           onCancel={() => {
@@ -90,7 +100,7 @@ const ChatRoom = ({ me, displayStatus}) => {
             setMessageInput("");
             return;
           }
-          sendMessage(server, { me: me, key: activeKey, body: msg });
+          sendMessage(activeKey, msg, me, server, chatBoxes);
           setMessageInput("");
         }}
       ></Input.Search>

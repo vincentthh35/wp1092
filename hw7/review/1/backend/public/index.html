@@ -22,7 +22,7 @@
 
       let messages = [];
 
-      const server = new WebSocket('ws://localhost:8080');
+      const server = new WebSocket('ws://localhost:4000');
       server.onopen = () => console.log('Server connected.');
       server.onmessage = (m) => {
         onEvent(JSON.parse(m.data));

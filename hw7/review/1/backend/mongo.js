@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 
 // i use mongodb://localhost:27017/cardmongo for MONGO_URL
 
@@ -20,4 +20,4 @@ const mongo = {
   connect: connectMongo,
 };
 
-module.exports = mongo;
+export default mongo;

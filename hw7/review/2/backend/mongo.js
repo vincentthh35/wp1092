@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 // i use mongodb://localhost:27017/cardmongo for MONGO_URL
 
 function connectMongo() {
-  mongoose.connect(process.env.MONGO_URL, {
+  mongoose.connect('mongodb://localhost:27017/testmongo', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -20,4 +20,4 @@ const mongo = {
   connect: connectMongo,
 };
 
-export default mongo;
+module.exports = mongo;
