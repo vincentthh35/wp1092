@@ -1,0 +1,1 @@
+如果server端顯示Cannot read delete property之類的錯誤，請等前端在瀏覽器上開好之後，重新yarn server一次即可，感謝
